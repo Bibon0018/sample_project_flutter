@@ -17,7 +17,13 @@ class RegistrationView extends GetView<RegistrationController> {
         resizeToAvoidBottomInset: true,
         appBar: PreferredSize(
           preferredSize: Size(Get.width, 50),
-          child: GradientAppBar(false,"RegistrationView"),
+          child: GradientAppBar(
+            true,
+            "RegistrationView",
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+          ),
         ),
         body: Container(
             height: Get.height - 50,
