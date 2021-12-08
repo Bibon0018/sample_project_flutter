@@ -12,6 +12,7 @@ import 'package:gql_dio_link/gql_dio_link.dart' hide HttpLinkHeaders;
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:sample_project/controllers/news_controller.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -73,7 +74,7 @@ class ApiController extends DisposableInterface {
   static const _authRegisterRoute = '/auth/register';
   static const _authLoginRoute = '/auth/login';
   static const _authLogoutRoute = '/auth/logout';
-  static const _authFirebaseRoute = '/auth/firebase';
+  // static const _authFirebaseRoute = '/auth/firebase';
   static const _sendCode = '/auth/sms/send-code';
   static const _authLoginWithSms = '/auth/sms/login';
 
@@ -199,6 +200,9 @@ class ApiController extends DisposableInterface {
         case 'connection_ack':
           UserController.to.unsubscribe();
           UserController.to.subscribe();
+          NewsController.to.unsubscribe();
+          NewsController.to.subscribe();
+
           _recconectController.add('event');
           break;
         default:
@@ -206,6 +210,7 @@ class ApiController extends DisposableInterface {
       }
     });
   }
+
 
   Future<void> refreshToken() async {
     assert(token.value != null);
@@ -249,6 +254,8 @@ class ApiController extends DisposableInterface {
       expiresIn: result.data['jwt_expires_in'],
       refreshToken: result.data['refresh_token'],
     );
+    print("accessToken === $accessToken");
+    print("refreshToken === $refreshToken");
     await UserController.to.loadUser();
   }
 

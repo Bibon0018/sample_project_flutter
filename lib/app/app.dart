@@ -13,6 +13,7 @@ class App extends StatelessWidget {
     return GraphQLProvider(
       client: ValueNotifier(ApiController.client),
       child: GetMaterialApp(
+        
         debugShowCheckedModeBanner: false,
         title: "Application",
         theme: AppTheme.lightTheme,

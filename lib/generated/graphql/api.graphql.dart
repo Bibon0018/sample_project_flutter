@@ -90,6 +90,38 @@ class GetCurrentUser$QueryRoot extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class CurrentUser$SubscriptionRoot$User extends JsonSerializable
+    with EquatableMixin, UserMixin {
+  CurrentUser$SubscriptionRoot$User();
+
+  factory CurrentUser$SubscriptionRoot$User.fromJson(
+          Map<String, dynamic> json) =>
+      _$CurrentUser$SubscriptionRoot$UserFromJson(json);
+
+  @override
+  List<Object?> get props => [$$typename, id, displayName];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CurrentUser$SubscriptionRoot$UserToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CurrentUser$SubscriptionRoot extends JsonSerializable
+    with EquatableMixin {
+  CurrentUser$SubscriptionRoot();
+
+  factory CurrentUser$SubscriptionRoot.fromJson(Map<String, dynamic> json) =>
+      _$CurrentUser$SubscriptionRootFromJson(json);
+
+  CurrentUser$SubscriptionRoot$User? user;
+
+  @override
+  List<Object?> get props => [user];
+  @override
+  Map<String, dynamic> toJson() => _$CurrentUser$SubscriptionRootToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class News$SubscriptionRoot$News extends JsonSerializable
     with EquatableMixin, NewsMixin {
   News$SubscriptionRoot$News();
@@ -325,38 +357,6 @@ class AuthRolesOrderBy extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$AuthRolesOrderByToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true)
-class CurrentUser$SubscriptionRoot$User extends JsonSerializable
-    with EquatableMixin, UserMixin {
-  CurrentUser$SubscriptionRoot$User();
-
-  factory CurrentUser$SubscriptionRoot$User.fromJson(
-          Map<String, dynamic> json) =>
-      _$CurrentUser$SubscriptionRoot$UserFromJson(json);
-
-  @override
-  List<Object?> get props => [$$typename, id, displayName];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$CurrentUser$SubscriptionRoot$UserToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class CurrentUser$SubscriptionRoot extends JsonSerializable
-    with EquatableMixin {
-  CurrentUser$SubscriptionRoot();
-
-  factory CurrentUser$SubscriptionRoot.fromJson(Map<String, dynamic> json) =>
-      _$CurrentUser$SubscriptionRootFromJson(json);
-
-  CurrentUser$SubscriptionRoot$User? user;
-
-  @override
-  List<Object?> get props => [user];
-  @override
-  Map<String, dynamic> toJson() => _$CurrentUser$SubscriptionRootToJson(this);
-}
-
 enum OrderBy {
   @JsonValue('asc')
   asc,
@@ -553,6 +553,95 @@ class GetCurrentUserQuery
 }
 
 @JsonSerializable(explicitToJson: true)
+class CurrentUserArguments extends JsonSerializable with EquatableMixin {
+  CurrentUserArguments({required this.userId});
+
+  @override
+  factory CurrentUserArguments.fromJson(Map<String, dynamic> json) =>
+      _$CurrentUserArgumentsFromJson(json);
+
+  late String userId;
+
+  @override
+  List<Object?> get props => [userId];
+  @override
+  Map<String, dynamic> toJson() => _$CurrentUserArgumentsToJson(this);
+}
+
+final CURRENT_USER_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'CurrentUser'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'userId')),
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'users_by_pk'),
+            alias: NameNode(value: 'user'),
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'id'),
+                  value: VariableNode(name: NameNode(value: 'userId')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(name: NameNode(value: 'User'), directives: [])
+            ]))
+      ])),
+  FragmentDefinitionNode(
+      name: NameNode(value: 'User'),
+      typeCondition: TypeConditionNode(
+          on: NamedTypeNode(name: NameNode(value: 'users'), isNonNull: false)),
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null),
+        FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null),
+        FieldNode(
+            name: NameNode(value: 'display_name'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null)
+      ]))
+]);
+
+class CurrentUserSubscription
+    extends GraphQLQuery<CurrentUser$SubscriptionRoot, CurrentUserArguments> {
+  CurrentUserSubscription({required this.variables});
+
+  @override
+  final DocumentNode document = CURRENT_USER_SUBSCRIPTION_DOCUMENT;
+
+  @override
+  final String operationName = 'CurrentUser';
+
+  @override
+  final CurrentUserArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  CurrentUser$SubscriptionRoot parse(Map<String, dynamic> json) =>
+      CurrentUser$SubscriptionRoot.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
 class NewsArguments extends JsonSerializable with EquatableMixin {
   NewsArguments({this.orderBy});
 
@@ -665,93 +754,4 @@ class NewsSubscription
   @override
   News$SubscriptionRoot parse(Map<String, dynamic> json) =>
       News$SubscriptionRoot.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class CurrentUserArguments extends JsonSerializable with EquatableMixin {
-  CurrentUserArguments({required this.userId});
-
-  @override
-  factory CurrentUserArguments.fromJson(Map<String, dynamic> json) =>
-      _$CurrentUserArgumentsFromJson(json);
-
-  late String userId;
-
-  @override
-  List<Object?> get props => [userId];
-  @override
-  Map<String, dynamic> toJson() => _$CurrentUserArgumentsToJson(this);
-}
-
-final CURRENT_USER_SUBSCRIPTION_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-      type: OperationType.subscription,
-      name: NameNode(value: 'CurrentUser'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'userId')),
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-            name: NameNode(value: 'users_by_pk'),
-            alias: NameNode(value: 'user'),
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'id'),
-                  value: VariableNode(name: NameNode(value: 'userId')))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(name: NameNode(value: 'User'), directives: [])
-            ]))
-      ])),
-  FragmentDefinitionNode(
-      name: NameNode(value: 'User'),
-      typeCondition: TypeConditionNode(
-          on: NamedTypeNode(name: NameNode(value: 'users'), isNonNull: false)),
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null),
-        FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null),
-        FieldNode(
-            name: NameNode(value: 'display_name'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null)
-      ]))
-]);
-
-class CurrentUserSubscription
-    extends GraphQLQuery<CurrentUser$SubscriptionRoot, CurrentUserArguments> {
-  CurrentUserSubscription({required this.variables});
-
-  @override
-  final DocumentNode document = CURRENT_USER_SUBSCRIPTION_DOCUMENT;
-
-  @override
-  final String operationName = 'CurrentUser';
-
-  @override
-  final CurrentUserArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  CurrentUser$SubscriptionRoot parse(Map<String, dynamic> json) =>
-      CurrentUser$SubscriptionRoot.fromJson(json);
 }

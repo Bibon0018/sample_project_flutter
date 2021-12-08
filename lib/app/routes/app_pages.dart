@@ -4,6 +4,10 @@ import 'package:sample_project/app/modules/auth/bindings/auth_binding.dart';
 import 'package:sample_project/app/modules/auth/views/auth_view.dart';
 import 'package:sample_project/app/modules/home/bindings/home_binding.dart';
 import 'package:sample_project/app/modules/home/views/home_view.dart';
+import 'package:sample_project/app/modules/post/bindings/post_binding.dart';
+import 'package:sample_project/app/modules/post/views/post_view.dart';
+import 'package:sample_project/app/modules/registration/bindings/registration_binding.dart';
+import 'package:sample_project/app/modules/registration/views/registration_view.dart';
 
 part 'app_routes.dart';
 
@@ -20,6 +24,16 @@ class AppPages {
       name: _Paths.AUTH,
       page: () => AuthView(),
       binding: AuthBinding(),
+    ),
+    GetPage(
+      name: _Paths.REGISTRATION,
+      page: () => RegistrationView(),
+      binding: RegistrationBinding(),
+    ),
+    GetPage(
+      name: _Paths.POST,
+      page: () => PostView(),
+      binding: PostBinding(),
     ),
   ];
 }

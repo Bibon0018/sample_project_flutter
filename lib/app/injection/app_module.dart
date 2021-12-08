@@ -4,6 +4,7 @@ import 'package:sample_project/controllers/controllers.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:sample_project/controllers/news_controller.dart';
 
 late BuildMode kBuildMode;
 
@@ -29,4 +30,5 @@ Future<void> initAppModule(BuildMode buildMode) async {
     storageBaseUrl: storageBaseUrl,
   )).init();
   await Get.put(UserController()).init();
+  Get.put(NewsController());
 }

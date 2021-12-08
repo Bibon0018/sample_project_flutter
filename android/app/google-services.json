@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "666694060760",
-    "project_id": "sample-691b5",
-    "storage_bucket": "sample-691b5.appspot.com"
+    "project_number": "969270292594",
+    "project_id": "test-egor-b",
+    "storage_bucket": "test-egor-b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:666694060760:android:e8c5ce8183e856a90765ad",
+        "mobilesdk_app_id": "1:969270292594:android:9a637726a4ada4c8c512eb",
         "android_client_info": {
-          "package_name": "com.example.sample_project"
+          "package_name": "com.egor.b"
         }
       },
       "oauth_client": [
         {
-          "client_id": "666694060760-haeanh0dbchkva9mj65tcdblp0j35o3i.apps.googleusercontent.com",
+          "client_id": "969270292594-h3h6nqof0ri2k1dudj05f11g8ltor13o.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBxJ7rIv7xrzmNzrWq6yTfpuHxCM-pwhjs"
+          "current_key": "AIzaSyAONrsEI4k_0Vz7parWWvH5BMIqTvTnpWc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "666694060760-haeanh0dbchkva9mj65tcdblp0j35o3i.apps.googleusercontent.com",
+              "client_id": "969270292594-h3h6nqof0ri2k1dudj05f11g8ltor13o.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

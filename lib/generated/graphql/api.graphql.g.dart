@@ -65,6 +65,37 @@ Map<String, dynamic> _$GetCurrentUser$QueryRootToJson(
       'user': instance.user?.toJson(),
     };
 
+CurrentUser$SubscriptionRoot$User _$CurrentUser$SubscriptionRoot$UserFromJson(
+    Map<String, dynamic> json) {
+  return CurrentUser$SubscriptionRoot$User()
+    ..$$typename = json['__typename'] as String?
+    ..id = json['id'] as String
+    ..displayName = json['display_name'] as String?;
+}
+
+Map<String, dynamic> _$CurrentUser$SubscriptionRoot$UserToJson(
+        CurrentUser$SubscriptionRoot$User instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'display_name': instance.displayName,
+    };
+
+CurrentUser$SubscriptionRoot _$CurrentUser$SubscriptionRootFromJson(
+    Map<String, dynamic> json) {
+  return CurrentUser$SubscriptionRoot()
+    ..user = json['user'] == null
+        ? null
+        : CurrentUser$SubscriptionRoot$User.fromJson(
+            json['user'] as Map<String, dynamic>);
+}
+
+Map<String, dynamic> _$CurrentUser$SubscriptionRootToJson(
+        CurrentUser$SubscriptionRoot instance) =>
+    <String, dynamic>{
+      'user': instance.user?.toJson(),
+    };
+
 News$SubscriptionRoot$News _$News$SubscriptionRoot$NewsFromJson(
     Map<String, dynamic> json) {
   return News$SubscriptionRoot$News()
@@ -294,37 +325,6 @@ Map<String, dynamic> _$AuthRolesOrderByToJson(AuthRolesOrderBy instance) =>
       'role': _$OrderByEnumMap[instance.role],
     };
 
-CurrentUser$SubscriptionRoot$User _$CurrentUser$SubscriptionRoot$UserFromJson(
-    Map<String, dynamic> json) {
-  return CurrentUser$SubscriptionRoot$User()
-    ..$$typename = json['__typename'] as String?
-    ..id = json['id'] as String
-    ..displayName = json['display_name'] as String?;
-}
-
-Map<String, dynamic> _$CurrentUser$SubscriptionRoot$UserToJson(
-        CurrentUser$SubscriptionRoot$User instance) =>
-    <String, dynamic>{
-      '__typename': instance.$$typename,
-      'id': instance.id,
-      'display_name': instance.displayName,
-    };
-
-CurrentUser$SubscriptionRoot _$CurrentUser$SubscriptionRootFromJson(
-    Map<String, dynamic> json) {
-  return CurrentUser$SubscriptionRoot()
-    ..user = json['user'] == null
-        ? null
-        : CurrentUser$SubscriptionRoot$User.fromJson(
-            json['user'] as Map<String, dynamic>);
-}
-
-Map<String, dynamic> _$CurrentUser$SubscriptionRootToJson(
-        CurrentUser$SubscriptionRoot instance) =>
-    <String, dynamic>{
-      'user': instance.user?.toJson(),
-    };
-
 UpdateUserArguments _$UpdateUserArgumentsFromJson(Map<String, dynamic> json) {
   return UpdateUserArguments(
     id: json['id'] as String,
@@ -352,6 +352,18 @@ Map<String, dynamic> _$GetCurrentUserArgumentsToJson(
       'userId': instance.userId,
     };
 
+CurrentUserArguments _$CurrentUserArgumentsFromJson(Map<String, dynamic> json) {
+  return CurrentUserArguments(
+    userId: json['userId'] as String,
+  );
+}
+
+Map<String, dynamic> _$CurrentUserArgumentsToJson(
+        CurrentUserArguments instance) =>
+    <String, dynamic>{
+      'userId': instance.userId,
+    };
+
 NewsArguments _$NewsArgumentsFromJson(Map<String, dynamic> json) {
   return NewsArguments(
     orderBy: (json['orderBy'] as List<dynamic>?)
@@ -363,16 +375,4 @@ NewsArguments _$NewsArgumentsFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$NewsArgumentsToJson(NewsArguments instance) =>
     <String, dynamic>{
       'orderBy': instance.orderBy?.map((e) => e.toJson()).toList(),
-    };
-
-CurrentUserArguments _$CurrentUserArgumentsFromJson(Map<String, dynamic> json) {
-  return CurrentUserArguments(
-    userId: json['userId'] as String,
-  );
-}
-
-Map<String, dynamic> _$CurrentUserArgumentsToJson(
-        CurrentUserArguments instance) =>
-    <String, dynamic>{
-      'userId': instance.userId,
     };

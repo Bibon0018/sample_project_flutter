@@ -4,13 +4,12 @@ import 'package:get/get.dart';
 import 'package:sample_project/app/app.dart';
 import 'package:sample_project/app/routes/app_pages.dart';
 import 'package:sample_project/app/widgets/app_bar.dart';
-
 import 'package:sample_project/app/widgets/gradient_button.dart';
 import 'package:sample_project/controllers/api_controller.dart';
 
-import '../controllers/auth_controller.dart';
+import '../controllers/post_controller.dart';
 
-class AuthView extends GetView<AuthController> {
+class PostView extends GetView<PostController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +17,7 @@ class AuthView extends GetView<AuthController> {
         resizeToAvoidBottomInset: true,
         appBar: PreferredSize(
           preferredSize: Size(Get.width, 50),
-          child: GradientAppBar(false,"AuthViev",),
+          child: GradientAppBar(false,"PostView"),
         ),
         body: Container(
             height: Get.height - 50,
@@ -71,26 +70,11 @@ class AuthView extends GetView<AuthController> {
                         height: 30,
                       ),
                       InkWell(
-                          onTap: () => controller.gologin(),
-                          child: GradientButton(50, 110, "Login")),
+                          onTap: () => controller.goRegistration(),
+                          child: GradientButton(50, 110, "SingUp")),
                       SizedBox(
                         height: 30,
                       ),
-                      InkWell(
-                        onTap: () => controller.goRegistration(),
-                        child: Container(
-                          padding: EdgeInsets.only(bottom: 20),
-                          alignment: Alignment.bottomCenter,
-                          child: Text(
-                            'SingUp',
-                            style: new TextStyle(
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.bold,
-                                foreground: Paint()
-                                  ..shader = controller.linearGradient),
-                          ),
-                        ),
-                      )
                     ],
                   ),
                 ),

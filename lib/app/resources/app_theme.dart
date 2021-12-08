@@ -7,8 +7,27 @@ class AppTheme {
   );
 
   static ThemeData lightTheme = ThemeData(
-    primaryColor: Colors.white,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+            primary: Colors.blue,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5)))),
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          borderSide: BorderSide(color: Colors.grey.shade300, width: 2)),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderSide: BorderSide(color: Colors.grey.shade300, width: 2),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderSide: BorderSide(color: Colors.grey.shade300, width: 2),
+      ),
+    ),
+    primaryColor: Colors.black,
     accentColor: Colors.black,
+    hintColor: Colors.black,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     bottomSheetTheme: BottomSheetThemeData(
       shape: RoundedRectangleBorder(
