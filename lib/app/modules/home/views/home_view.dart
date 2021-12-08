@@ -20,8 +20,7 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(Get.width, 50),
-        child: GradientAppBar(
-            true, UserController.to.user.value!.displayName ?? '', onTap: () {
+        child: GradientAppBar(true, 'News', onTap: () {
           controller.onLogOut();
         }),
       ),
@@ -29,7 +28,6 @@ class HomeView extends GetView<HomeController> {
         child: StreamBuilder(
           stream: ApiController.to.reconnectedStream,
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-            print("EVENT = EVENT = ${snapshot.data}");
             return Subscription(
                 options: subQuery.sOptions(),
                 builder: (result) {
@@ -37,7 +35,6 @@ class HomeView extends GetView<HomeController> {
                     stream: controller.news.stream,
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {
-                      print("EVENT = EVENT = ${snapshot.data}");
                       return Subscription(
                           options: subQuery.sOptions(),
                           builder: (result) {
@@ -149,5 +146,3 @@ class CustomBottomSheet extends StatelessWidget {
     );
   }
 }
-
-
